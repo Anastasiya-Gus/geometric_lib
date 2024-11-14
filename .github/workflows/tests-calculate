@@ -39,3 +39,10 @@ jobs:
       - name: Run tests
         run: |
           python -m unittest discover module
+
+      - name: Check code style
+              run: black --check .
+
+      - name: Format code (optional)
+              run: black .
+              if: ${{ failure() }}
