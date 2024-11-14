@@ -20,6 +20,11 @@ jobs:
       GROUP_NUMBER: "M3111"
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+            ref: feat/tests
+            
       - name: Print information
         run: |
           echo "Full Name: ${{ env.FULL_NAME }}"
