@@ -1,0 +1,41 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+      - release
+  pull_request:
+    branches:
+      - master
+      - release
+      - develop
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      FULL_NAME: "Гущина Анастасия Евгеньевна"
+      GROUP_NUMBER: "M3111"
+
+    steps:
+      - name: Print information
+        run: |
+          echo "Full Name: ${{ env.FULL_NAME }}"
+          echo "Group Number: ${{ env.GROUP_NUMBER }}"
+          echo "Github Nickname: ${{ github.actor }}"
+
+      - name: Install Python 3.13
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          python -m unittest discover module
